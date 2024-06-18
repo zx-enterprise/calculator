@@ -1,0 +1,17 @@
+.button {
+  padding: 1rem;
+  border-radius: 5rem;
+  margin: 0.5rem;
+}
+
+.num {
+  background-color: lightgray;
+}
+
+.operation {
+  background-color: orange;
+}
+
+.reset {
+  background-color: lightcoral;
+}

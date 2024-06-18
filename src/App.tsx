@@ -8,9 +8,11 @@ function App() {
   return (
     <div>
       <h1>Calculator</h1>
-      <div>
+      <div style={{ maxWidth: '800px' }}>
         <InputField />
         <Keyboard />
+
+        <button className="button">Close</button>
       </div>
     </div>
   );
