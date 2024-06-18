@@ -1,24 +1,27 @@
-import { FunctionComponent, PropsWithChildren } from 'react';
-// import './sample.css';
-import stylesButton from './Button.module.css';
-// import stylesDefault from '../default.module.css';
+import { FunctionComponent, HTMLAttributes, PropsWithChildren } from 'react';
+import styles from './Button.module.css';
 
-// const InternalButton = styled.button`
-//   border-radius: 5px;
-// `;
+type ButtonVariant = 'num' | 'operation' | 'reset';
 
-const Button: FunctionComponent<PropsWithChildren> = ({ children }) => {
-  const classModifier = 'btn btn-danger';
-  //  Math.random() < 0.5 ? stylesDefault.bold : stylesDefault.italic;
+// HTMLAttributes<HTMLButtonElement>>
+interface ButtonProps
+  extends PropsWithChildren<HTMLAttributes<HTMLButtonElement>> {
+  variant?: ButtonVariant;
+}
 
-  // const className = stylesButton.body + ' ' + classModifier;
-  const className = `${stylesButton.body} ${classModifier}`;
-  console.log('className:', className);
-
-  const stylesToRender = { borderRadius: '5px' };
+/**
+ * Renders a button with a specific variant
+ * @component Button
+ */
+const Button: FunctionComponent<ButtonProps> = ({
+  children,
+  variant = 'num',
+  ...restOfProps
+}) => {
+  const classToRender = `${styles.button} ${styles[variant]}`;
 
   return (
-    <button className={className} style={stylesToRender}>
+    <button className={classToRender} {...restOfProps}>
       {children}
     </button>
   );
