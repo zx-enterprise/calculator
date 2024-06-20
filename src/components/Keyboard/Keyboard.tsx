@@ -1,36 +1,55 @@
-import { MouseEvent } from 'react';
+import { FunctionComponent, MouseEvent } from 'react';
 import Button from '../Button';
 
-const Keyboard = () => {
-  const onNumButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log('Num button clicked:', event?.target?.textContent);
+type Props = {
+  onButtonClick: (key: string) => void;
+};
+
+const Keyboard: FunctionComponent<Props> = ({ onButtonClick }) => {
+  const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
+    const key = event?.target?.textContent;
+    // const key = event && event.target && event.target.textContent;
+    onButtonClick(key);
   };
 
   return (
     <div id="keyboard" style={{ border: '1px dotted lime' }}>
       <div>
-        <Button onClick={onNumButtonClick}>1</Button>
-        <Button onClick={onNumButtonClick}>2</Button>
-        <Button onClick={onNumButtonClick}>3</Button>
-        <Button variant="operation">+</Button>
+        <Button onClick={handleButtonClick}>1</Button>
+        <Button onClick={handleButtonClick}>2</Button>
+        <Button onClick={handleButtonClick}>3</Button>
+        <Button variant="operation" onClick={handleButtonClick}>
+          +
+        </Button>
       </div>
       <div>
-        <Button>4</Button>
-        <Button>5</Button>
-        <Button>6</Button>
-        <Button variant="operation">-</Button>
+        <Button onClick={handleButtonClick}>4</Button>
+        <Button onClick={handleButtonClick}>5</Button>
+        <Button onClick={handleButtonClick}>6</Button>
+        <Button variant="operation" onClick={handleButtonClick}>
+          -
+        </Button>
       </div>
       <div>
-        <Button>7</Button>
-        <Button>8</Button>
-        <Button>9</Button>
-        <Button variant="operation">*</Button>
+        <Button onClick={handleButtonClick}>7</Button>
+        <Button onClick={handleButtonClick}>8</Button>
+        <Button onClick={handleButtonClick}>9</Button>
+        <Button variant="operation" onClick={handleButtonClick}>
+          *
+        </Button>
       </div>
       <div>
-        <Button>0</Button>
-        <Button variant="reset">C</Button>
-        <Button variant="operation">=</Button>
-        <Button variant="operation">/</Button>
+        <Button onClick={handleButtonClick}>0</Button>
+        <Button onClick={handleButtonClick}>.</Button>
+        <Button variant="reset" onClick={handleButtonClick}>
+          C
+        </Button>
+        <Button variant="operation" onClick={handleButtonClick}>
+          =
+        </Button>
+        <Button variant="operation" onClick={handleButtonClick}>
+          /
+        </Button>
       </div>
     </div>
   );
