@@ -14,16 +14,18 @@ function App() {
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-    // console.log(
-    //   'onInputChange() - oldValue:',
-    //   value,
-    //   'newValue:',
-    //   event.target.value
-    // );
+    console.log(
+      'onInputChange() - oldValue:',
+      value,
+      'newValue:',
+      event.target.value
+    );
   };
 
   const onButtonClick = (typedKey: string) => {
     const key = typedKey.toLowerCase();
+
+    console.log('onButtonClick() - key:', key);
 
     setValue((old) => {
       // Operations and reset
@@ -38,8 +40,8 @@ function App() {
           return '0';
         }
 
-        const a = parseInt(prevValue);
-        const b = parseInt(value);
+        const a = parseFloat(prevValue);
+        const b = parseFloat(value);
         switch (operator) {
           case '+':
             setPrevValue((a + b).toString());
@@ -79,7 +81,6 @@ function App() {
       }
 
       // TODO: Add more validation
-
       return old + key;
     });
   };
@@ -91,54 +92,13 @@ function App() {
       <h1>Calculator {value}</h1>
       <div style={{ maxWidth: '800px' }}>
         <InputField value={value} onChange={onChange} />
-        <Keyboard onButtonClick={onButtonClick} />
+        <Keyboard currentInput={value} onButtonClick={onButtonClick} />
+      </div>
 
-        {/* <button
-          onClick={() => {
-            setPrevValue(value);
-            setOperator('+');
-          }}
-        >
-          +
-        </button>
-        <button
-          onClick={() => {
-            setPrevValue(value);
-            setOperator('-');
-          }}
-        >
-          -
-        </button>
-        <button
-          onClick={() => {
-            const a = parseInt(prevValue);
-            const b = parseInt(value);
-            switch (operator) {
-              case '+':
-                setPrevValue((a + b).toString());
-                break;
-              case '-':
-                setPrevValue((a - b).toString());
-                break;
-              case '*':
-                setPrevValue((a * b).toString());
-                break;
-              case '/':
-                setPrevValue((a / b).toString());
-                break;
-              default:
-              // do nothing
-            }
-            setValue('');
-            setOperator('');
-          }}
-        >
-          =
-        </button> */}
-
+      <h1>Calculator Integwr Only</h1>
+      <div style={{ maxWidth: '800px' }}>
         <InputField value={value} onChange={onChange} />
-
-        <button className="button">Close</button>
+        <Keyboard isIntegerOnly onButtonClick={onButtonClick} />
       </div>
     </div>
   );

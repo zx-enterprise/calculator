@@ -7,6 +7,7 @@ type ButtonVariant = 'num' | 'operation' | 'reset';
 interface ButtonProps
   extends PropsWithChildren<HTMLAttributes<HTMLButtonElement>> {
   variant?: ButtonVariant;
+  disabled?: boolean;
 }
 
 /**

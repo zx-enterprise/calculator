@@ -1,11 +1,21 @@
 import { FunctionComponent, MouseEvent } from 'react';
 import Button from '../Button';
+import { FLOAT_SEPARATOR } from '../../utils';
 
 type Props = {
+  currentInput?: string;
+  isIntegerOnly?: boolean;
   onButtonClick: (key: string) => void;
 };
 
-const Keyboard: FunctionComponent<Props> = ({ onButtonClick }) => {
+const Keyboard: FunctionComponent<Props> = ({
+  currentInput = '',
+  isIntegerOnly = false,
+  onButtonClick,
+}) => {
+  const isDotButtonDisabled =
+    isIntegerOnly || currentInput.includes(FLOAT_SEPARATOR);
+
   const handleButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
     const key = event?.target?.textContent;
     // const key = event && event.target && event.target.textContent;
@@ -40,7 +50,9 @@ const Keyboard: FunctionComponent<Props> = ({ onButtonClick }) => {
       </div>
       <div>
         <Button onClick={handleButtonClick}>0</Button>
-        <Button onClick={handleButtonClick}>.</Button>
+        <Button disabled={isDotButtonDisabled} onClick={handleButtonClick}>
+          .
+        </Button>
         <Button variant="reset" onClick={handleButtonClick}>
           C
         </Button>
